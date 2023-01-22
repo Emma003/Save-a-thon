@@ -88,3 +88,4 @@ def add_expense(expense):
     print(sql)
     cursor.execute(sql, list(expense.values()))
     connection.commit()
+

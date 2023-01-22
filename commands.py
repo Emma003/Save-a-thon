@@ -41,6 +41,12 @@ def run_discord_bot():
         help_embed.add_field(name="$new_profile", value="Creating your profile \n", inline=False)
         help_embed.add_field(name="$profile", value="Allows you to view the specifics of your account \n", inline=False)
         help_embed.add_field(name="$FAQ", value="Frequently asked Questions and their answers \n", inline=False)
+        help_embed.add_field(name="$templates", value="You are presented with 3 saving templates you can choose from!",
+                             inline=False)
+        help_embed.add_field(name="$tchoice (number 1-3)",
+                             value="You are presented with dollar amounts per category depending on your income and your saving profile",
+                             inline=False)
+        help_embed.add_field(name="$open_profile", value="Open the profile you have created for the user", inline=False)
         if is_private:
             await ctx.author.send(embed=help_embed)
         else:
@@ -58,7 +64,7 @@ def run_discord_bot():
         calculator_embed.add_field(name= "$tax", value= "This option will return the cost of an item with its tax included \n Please enter the information the following 2 formats: \n 1. $tax 200 (the interest will be a default value assigned) \n 2.$tax 200 22 (the interest is the specified value given, 22 in this case", inline=False)
         calculator_embed.add_field(name= "$wage", value= "This will convert your wage into a monthly salary \n Please enter information in the following format: \n $wage (amount)(hour/month/year) (optional: how many hours worked per period)", inline= False)
         calculator_embed.add_field(name= "$interest", value= "This will return the future value of a lump with compounded interest \n Please enter the information in the following format: \n $interest (amount) (interest) (time in years)",inline= False)
-        calculator_embed.add_field(name= "$inverse_interest", value= "This will calculate the amount of time it will take to reach your goal with your initial investment and interest rate \n Please enter information in the following format: \n $reverse_interest(Amount)(interest rate)(goal)", inline=False)
+        calculator_embed.add_field(name= "$inverse_interest", value= "This will calculate the amount of time it will take to reach your goal with your initial investment and interest rate \n Please enter information in the following format: \n $inverse_interest(Amount)(interest rate)(goal)", inline=False)
         if is_private:
             await ctx.author.send(embed=calculator_embed)
         else:
@@ -339,6 +345,22 @@ def run_discord_bot():
             await ctx.author.send(embed=create_profile_embed)
         else:
             await ctx.channel.send(embed=create_profile_embed)
+
+    @bot.command()
+    async def add_goal_contribution(ctx, arg=""):
+        contribution = arg.split(",")
+        is_private = check_mute(arg)
+        create_profile_embed = discord.Embed(
+            title="Your expenses",
+            description="Your " + contribution[1] + "$ " + contribution[0] + " expense has been registered",
+            color=discord.Color.dark_orange()
+        )
+
+        if is_private:
+            await ctx.author.send(embed=create_profile_embed)
+        else:
+            await ctx.channel.send(embed=create_profile_embed)
+
 
 
 
