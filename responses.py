@@ -3,6 +3,9 @@ import discord
 import calculator
 
 
+import discord
+
+import calculator
 def get_response(message):
     p_message = message.lower()
     #split by spaces
